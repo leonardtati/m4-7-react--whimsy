@@ -1,17 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import LikeButton from '../LikeButton';
+import format from "date-fns/format";
 
-import Action from './Action';
-import TweetActionIcon from './TweetActionIcon';
+import LikeButton from "../LikeButton";
+
+import Action from "./Action";
+import TweetActionIcon from "./TweetActionIcon";
 
 const propTypes = {
   displayName: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   avatarSrc: PropTypes.string.isRequired,
-  tweetContents: PropTypes.string.isRequired,
+  tweetContents: PropTypes.string.isRequired
 };
 
 const Tweet = ({
@@ -25,7 +27,7 @@ const Tweet = ({
   isLikedByCurrentUser,
   isRetweetedByCurrentUser,
   handleToggleLike,
-  handleToggleRetweet,
+  handleToggleRetweet
 }) => {
   return (
     <Wrapper>
@@ -38,6 +40,8 @@ const Tweet = ({
       </Header>
 
       <TweetContents>{tweetContents}</TweetContents>
+
+      <Timestamp>{format(timestamp, "h:mm A · MMM Mo, YYYY")}</Timestamp>
 
       <Divider />
 
@@ -59,8 +63,8 @@ const Tweet = ({
         >
           <TweetActionIcon
             kind="retweet"
-            color={isRetweetedByCurrentUser ? 'rgb(23, 191, 99)' : undefined}
-          />
+            color={isRetweetedByCurrentUser ? "rgb(23, 191, 99)" : undefined}
+          ></TweetActionIcon>
         </Action>
 
         <Action color="rgb(224, 36, 94)" size={40} onClick={handleToggleLike}>
@@ -77,7 +81,9 @@ const Tweet = ({
           <TweetActionIcon kind="share" />
         </Action>
       </Actions>
-
+      <Stats>
+        {numOfRetweets} Retweets {numOfLikes} Likes
+      </Stats>
       <Divider />
     </Wrapper>
   );
@@ -89,8 +95,8 @@ const Wrapper = styled.div`
   padding: 16px;
   text-align: left;
   /* padding-bottom: 0; */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Ubuntu, 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu, "Helvetica Neue", sans-serif;
 `;
 
 const Header = styled.header`
@@ -142,6 +148,7 @@ const Divider = styled.div`
 const Stats = styled.div`
   display: flex;
   align-items: center;
+
   height: 48px;
 `;
 
