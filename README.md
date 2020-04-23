@@ -38,13 +38,13 @@ This project uses a slightly different directory structure: each component gets 
 The `index.js` has this peculiar thing:
 
 ```js
-export { default } from './SomeComponent';
+export { default } from "./SomeComponent";
 ```
 
 This structure allows for something pretty neat. Consider this snippet from `App.js`:
 
 ```js
-import Tweet from '../Tweet';
+import Tweet from "../Tweet";
 ```
 
 This import points to the _directory_, `src/components/Tweet`. When you point an import at a directory, it looks for an `index.js` inside; this is part of how Node.js module resolution works.
@@ -123,6 +123,8 @@ If you look at the `LikeButton` component, you'll notice that it already takes a
 
 By the end of this first exercise, you should have something that looks like this, and can handle toggling the like/retweet buttons on/off:
 
+///FIGUE OUT HOW TO MAKE THE RETWEET BUTTON THING STAY GREEN
+
 ![Exercise 1 complete](./__lecture/assets/ex-1-complete.gif)
 
 ## Exercise 2: Popping circle
@@ -141,7 +143,7 @@ Create a new `PoppingCircle` folder in `sec/components`, and create the followin
 `index.js` should contain:
 
 ```js
-export { default } from './PoppingCircle';
+export { default } from "./PoppingCircle";
 ```
 
 > If you're confused by this `index.js`, be sure to read the "Component directory structure" part of this README, near the top of the file! It's explained :)
@@ -166,7 +168,7 @@ Keyframe animations occur immediately on mount. We can leverage this by unmounti
 As a reminder, this is what the keyframes syntax looks like with styled-components:
 
 ```jsx
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 const turnBlue = keyframes`
   from {
@@ -287,18 +289,18 @@ Because we want the animation to happen on-mount, we'll make use of the `from` p
 As a reminder, here's an example of how React Spring works. See if you can work out how to transform this example into the effect you want:
 
 ```js
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from "react-spring";
 
 const SomeComponent = () => {
   const style = useSpring({
     opacity: 1,
     from: {
-      opacity: 0,
+      opacity: 0
     },
     config: {
       tension: 1000,
-      friction: 1,
-    },
+      friction: 1
+    }
   });
 
   return <animated.div style={style}>Boing</animated.div>;
@@ -340,14 +342,14 @@ Here's how to accomplish the springy effect:
 
 ```js
 const props = useSpring({
-  transform: 'scale(1)',
+  transform: "scale(1)",
   from: {
-    transform: 'scale(0)',
+    transform: "scale(0)"
   },
   config: {
     tension: 200,
-    friction: 12,
-  },
+    friction: 12
+  }
 });
 ```
 
@@ -524,7 +526,7 @@ const Wrapper = styled.div`
 For animations done in Javascript with React Spring, we need to access the value of that media query from within JS. You can do it like this:
 
 ```js
-const query = '(prefers-reduced-motion: reduce)';
+const query = "(prefers-reduced-motion: reduce)";
 
 const mediaQueryList = window.matchMedia(query);
 
@@ -539,11 +541,11 @@ React Spring has a prop, `immediate`, which makes updates jump immediately to th
 
 ```js
 const style = useSpring({
-  transform: 'whatever',
+  transform: "whatever",
   config: {
     /* settings */
   },
-  immediate: shouldReduceMotion,
+  immediate: shouldReduceMotion
 });
 ```
 
